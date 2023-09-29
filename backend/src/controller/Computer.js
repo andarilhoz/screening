@@ -2,7 +2,7 @@ const ComputerData = require('../model/ComputerData')
 
 module.exports = {
     async store(request, response) {        
-   
+        console.log("Received request at %s", new Date())
         const {uptime} = request.body
 
         const createdComputerData = await ComputerData.create({
@@ -17,8 +17,12 @@ module.exports = {
         let paginationLimit = request.query.limit ?? 10
 
         const savedData = await ComputerData.find({}, null, {skip: paginationSkip, limit: paginationLimit})
+        const lastIndex = parseInt(paginationSkip) + savedData.length
         
-        responseBody = {requests: savedData, lastIndex: parseInt(paginationSkip) + parseInt(paginationLimit)}
-        return response.json(responseBody)
+        formatted = '' 
+        savedData.forEach(item => formatted += `Request time: ${item['createdAt']} - uptime: ${item['uptime']}</br>`)
+        formatted += `lastIndex: ${lastIndex}`
+        
+        return response.send(formatted)
     }
 }
