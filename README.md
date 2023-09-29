@@ -25,6 +25,13 @@ with the following body:
     "uptime": String
 }
 ```
+
+and header:
+
+```
+    'Content-Type': 'application/json'
+```
+
 With this request, the application will save it to a mongodb database with the current timestamp, as well as the uptime info.
 
 
