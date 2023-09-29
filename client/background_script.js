@@ -7,7 +7,7 @@ async function callServer(){
     })
 
     const options = {
-        hostname: '127.0.0.1',
+        hostname: 'asghardian.com',
         path: '/compute',
         port: 3333,
         method: 'POST',
@@ -49,8 +49,8 @@ function httpRequest(options, data){
 function getUptime(){
     let uptime = os.uptime();
     let hours = Math.floor(uptime/(3600))
-    let minutes = Math.floor((uptime - (hours * 3600)) /60).toString().padStart(2)
-    let seconds = Math.floor(uptime - (hours * 3600) - (minutes * 60)).toString().padStart(2)
+    let minutes = Math.floor((uptime - (hours * 3600)) /60).toString().padStart(2, "0")
+    let seconds = Math.floor(uptime - (hours * 3600) - (minutes * 60)).toString().padStart(2, "0")
     return `${hours}:${minutes}:${seconds}`
 }
 
